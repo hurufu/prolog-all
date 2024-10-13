@@ -24,8 +24,8 @@ do
         -p) PROLOGS="${PROLOGS-} $2"; shift ;;
         -g) GOAL="$2"; shift ;;
         -h) usage; exit ;;
-        -O|-j|-P) ARGS="${ARGS-} $1$2"; shift ;;
-        --profile|--output-sync|--jobs) ARGS="${ARGS-} $1=$2"; shift ;;
+        -O|-j|-P) ARGS="${ARGS-} '$1$2'"; shift ;;
+        --profile|--output-sync|--jobs) ARGS="${ARGS-} $1 '$2'"; shift ;;
         *) ARGS="${ARGS-} $1" ;;
     esac
     shift
