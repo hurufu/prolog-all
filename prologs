@@ -32,4 +32,4 @@ done
 
 # PROLOGS variable is meant to be expanded to multiple arguments
 # shellcheck disable=SC2086
-echo "${MAKE:-make}" ${ARGS-} -f /usr/share/prologs/rules.mk PROG="${*:-test.pl}" MAIN="${GOAL:-test}" ${PROLOGS:-all}
+"${MAKE:-make}" ${ARGS-} -f /usr/share/prologs/rules.mk PROG="${*:-test.pl}" MAIN="${GOAL:-test}" ${PROLOGS:-all}
