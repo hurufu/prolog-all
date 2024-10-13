@@ -5,7 +5,7 @@ set -eu ${TRACE+-x}
 usage() {
     cat <<-EOT
 	Usage:
-	    $0 [-h] [-p prolog1 -p prolog2 ...] [-g goal] [make(1) options...] -- file1 file2 ...
+	    $0 [-h] [-p prolog1 -p prolog2 ...] [-g goal] [make(1) options ...] -- file1 file2 ...
 	
 	Supported Prologs:
 	    ciao gnu scryer swi trealla
