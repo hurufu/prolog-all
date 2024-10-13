@@ -16,7 +16,7 @@ EOT
 }
 
 # TODO: Figure out a way to pass all non-recognized options to make(1) without changes
-eval set -- "$(getopt -l profile::,keep-going,always-make -o hp:g:f:O::j::kBP:: -- "$@")"
+eval set -- "$(getopt -l output-sync::,jobs::,profile::,keep-going,always-make -o hp:g:f:O::j::kBP:: -- "$@")"
 while :
 do
     case $1 in
@@ -24,7 +24,8 @@ do
         -p) PROLOGS="${PROLOGS-} $2"; shift ;;
         -g) GOAL="$2"; shift ;;
         -h) usage; exit ;;
-        -O|-j|-P|--profile) ARGS="${ARGS-} $1 $2"; shift ;;
+        -O|-j|-P) ARGS="${ARGS-} $1$2"; shift ;;
+        --profile|--output-sync|--jobs) ARGS="${ARGS-} $1=$2"; shift ;;
         *) ARGS="${ARGS-} $1" ;;
     esac
     shift
