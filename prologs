@@ -5,25 +5,31 @@ set -eu ${TRACE+-x}
 usage() {
     cat <<-EOT
 	Usage:
-	    $0 [-h] [-k] [-O type] [-j jobs] [-p prolog1 -p prolog2 ...'] [-g goal] -- file
+	    $0 [-h] [-p prolog1 -p prolog2 ...] [-g goal] [make(1) options...] -- file1 file2 ...
 	
 	Supported Prologs:
 	    ciao gnu scryer swi trealla
+	
+	Environment variables:
+	    MAKE – make(1) compatible executable (can be eg. remake(1))
 EOT
 }
 
-while getopts hp:g:f: op
+# TODO: Figure out a way to pass all non-recognized options to make(1) without changes
+eval set -- "$(getopt -l profile::,keep-going,always-make -o hp:g:f:O::j::kBP:: -- "$@")"
+while :
 do
-    case $op in
-        p) PROLOGS="$PROLOGS $OPTARG" ;;
-        g) GOAL="$OPTARG" ;;
-        f) FILE="$OPTARG" ;;
-        h) usage; exit ;;
-        ?) usage; exit 1;;
+    case $1 in
+        --) shift; break ;;
+        -p) PROLOGS="${PROLOGS-} $2"; shift ;;
+        -g) GOAL="$2"; shift ;;
+        -h) usage; exit ;;
+        -O|-j|-P|--profile) ARGS="${ARGS-} $1 $2"; shift ;;
+        *) ARGS="${ARGS-} $1" ;;
     esac
+    shift
 done
-shift $((OPTIND - 1))
 
 # PROLOGS variable is meant to be expanded to multiple arguments
 # shellcheck disable=SC2086
-"${MAKE:-remake}" "$@" -f /usr/share/prologs/rules.mk PROG="${FILE}" MAIN="${GOAL:-test}" ${PROLOGS:-all}
+echo "${MAKE:-make}" ${ARGS-} -f /usr/share/prologs/rules.mk PROG="${*:-test.pl}" MAIN="${GOAL:-test}" ${PROLOGS:-all}
