@@ -16,8 +16,10 @@ b: $(PROG)
 	/opt/BProlog/8.1/bp -i $< -g '$(MAIN),halt'
 bin: $(PROG)
 	bp "consult('$<'),$(MAIN),halt"
-ciao: $(PROG)
-	ciao run $<
+ciao: ciao-main.pl $(PROG)
+	ciao run $^ $(MAIN)
+ciao-main.pl:
+	$(file >$@,main([X]) :- call(X).)
 csh: $(PROG)
 	cd '/opt/C#Prolog SF4.1' && env MONO_PATH=CSProlog/obj/Debug mono PLd/obj/Debug/PLd.exe "['$(realpath $<)'],$(MAIN),halt."
 dgks:
