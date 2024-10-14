@@ -4,7 +4,7 @@ PROG        ?= test.pl
 MAIN        ?= test
 
 # All supported Prolog implementations (keep alphabetic order!)
-PROLOGS     := b bin ciao eclipse gnu pop scryer swi trealla
+PROLOGS     := b bin ciao eclipse gnu pop projog scryer swi trealla
 
 .PHONY: $(PROLOGS) all
 all: $(PROLOGS)
@@ -38,7 +38,7 @@ jlog: $(PROG)
 pop: $(PROG)
 	poplog prolog ":prolog_callstack_lim(10000000),prolog_memlim(10000000),prolog_area_lim(10000000),library(catch),assert(poplog),['$<'],$(MAIN)."
 projog: $(PROG)
-	java -cp '/usr/local/opt/projog-0.10.0/lib/*' org.projog.tools.ProjogConsole $< <(echo '?- $(MAIN).') <(echo '?- quit.')
+	java -cp '/usr/share/java/projog/*' org.projog.tools.ProjogConsole $< <(echo '?- $(MAIN).') <(echo '?- quit.')
 scryer: $(PROG)
 	scryer-prolog $< -g '$(MAIN),halt'
 sicstus: $(PROG)
