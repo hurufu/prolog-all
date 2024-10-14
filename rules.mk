@@ -6,7 +6,7 @@ MAIN        ?= test
 DOCKER_TAG  := prolog-testbed
 
 # All supported Prolog implementations (keep alphabetic order!)
-PROLOGS     := ciao gnu scryer swi trealla
+PROLOGS     := ciao eclipse gnu scryer swi trealla
 
 .PHONY: $(PROLOGS) all
 all: $(PROLOGS)
@@ -29,7 +29,7 @@ doge-py: doge.pl
 	python /usr/local/git/dogelog/playerpy/canned/dogelog.py $<
 doge-java: doge.pl
 	java -cp /usr/local/git/dogelog/playerj/canned/dogelog.zip:playerj/canned Index $<
-doge.pl: $(PROG) Makefile
+doge.pl: $(PROG)
 	$(file >$@,false :- \+true. ?- ['$<'],$(MAIN).)
 eclipse: $(PROG)
 	eclipse-clp -e "['$<'],$(MAIN)"
