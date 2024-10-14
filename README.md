@@ -9,7 +9,7 @@ with all optional dependencies.
 
 ## Usage
 
-Start SWI-Prologs top level interpreter:
+Start SWI-Prolog top level interpreter:
 
     prologs -p swi
 
@@ -18,17 +18,23 @@ Run `foo,bar` from `file.pl` with all available prologs (both variants do the sa
     prologs -g foo -g bar file.pl
     prologs -p all -g foo,bar 'my file with spaces.pl'
 
-The program is implemented in Make, that means that it support parallel
+Read its help `prologs -h` for more options.
+
+The program is implemented in Make, that means that it supports parallel
 execution out-of-the box. This will run `main` from `my_prject.pl` with Scryer
-and Trealla Prologs:
+and Trealla Prologs simultaneously:
 
     prologs -p scryer -p trealla -j2 -O -g main -- my_project.pl
 
 You can use `remake(1)` to compare execution time of different implementations:
 
-    env MAKE=remake prologs -g run bench.pl
+    env MAKE=remake prologs -g run --profile bench.pl
 
-Read its help `prologs -h` for more options.
+Or alternatively in the futurue you would be able to use
+[biomake](https://github.com/evoldoers/biomake) to run your code on distributed
+cluster using queueing engine:
+
+    env MAKE=biomake prologs -g run bench.pl -j -Qpbs
 
 ## Currently working
 

@@ -18,6 +18,10 @@ bin: $(PROG)
 	bp "consult('$<'),$(MAIN),halt"
 ciao: $(PROG)
 	ciao run $<
+csh: $(PROG)
+	cd '/opt/C#Prolog SF4.1' && env MONO_PATH=CSProlog/obj/Debug mono PLd/obj/Debug/PLd.exe "['$(realpath $<)'],$(MAIN),halt."
+dgks:
+	java -cp /usr/local/src/dgks-prolog/PrologO.zip prolog.dgks.prolog
 doge: doge-js doge-py doge-java
 doge-js: doge.pl
 	node /usr/local/git/dogelog/player/canned/dogelog.mjs $<
@@ -31,6 +35,8 @@ eclipse: $(PROG)
 	eclipse-clp -e "['$<'],$(MAIN)"
 gnu: $(PROG)
 	env TRAILSZ=999999 GLOBALSZ=999999 gprolog --consult-file $< --query-goal '$(MAIN),halt'
+jlog: $(PROG)
+	java -jar /opt/jlog/1.3.6/JLog.jar
 pop: $(PROG)
 	poplog prolog ":prolog_callstack_lim(10000000),prolog_memlim(10000000),prolog_area_lim(10000000),library(catch),assert(poplog),['$<'],$(MAIN)."
 projog: $(PROG)

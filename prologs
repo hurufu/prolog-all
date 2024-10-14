@@ -1,11 +1,11 @@
 #!/bin/sh
-# POSIX shell script no bash-isms!
+# POSIX shell script, no bash-isms!
 
 set -eu ${TRACE+-x}
 
 usage() {
     cat <<-EOT
-	Unified CLI for different Prolog implementations
+	Unified CLI for different Prolog implementations.
 	
 	Usage:
 	    $0 [-h] [-p prolog1 -p 'prolog2 prolog3' ...] [-g goal1 -g goal2 ...] [make(1) options ...] [--] file1 file2 ...
@@ -14,7 +14,7 @@ usage() {
 	    ciao gnu scryer swi trealla
 	
 	Environment variables:
-	    MAKE – make(1) compatible executable (can be eg. remake(1))
+	    MAKE – make(1) compatible executable (can be eg. remake(1) or biomake)
 EOT
 }
 
