@@ -1,11 +1,14 @@
 #!/bin/sh
+# POSIX shell script no bash-isms!
 
 set -eu ${TRACE+-x}
 
 usage() {
     cat <<-EOT
+	Unified CLI for different Prolog implementations
+	
 	Usage:
-	    $0 [-h] [-p prolog1 -p prolog2 ...] [-g goal] [make(1) options ...] -- file1 file2 ...
+	    $0 [-h] [-p prolog1 -p 'prolog2 prolog3' ...] [-g goal1 -g goal2 ...] [make(1) options ...] [--] file1 file2 ...
 	
 	Supported Prologs:
 	    ciao gnu scryer swi trealla
@@ -15,22 +18,39 @@ usage() {
 EOT
 }
 
-# TODO: Figure out a way to pass all non-recognized options to make(1) without changes
-eval set -- "$(getopt -l output-sync::,jobs::,profile::,keep-going,always-make -o hp:g:f:O::j::kBP:: -- "$@")"
-while :
+# Dark arts of shell scripting. This code properly quotes command line arguments
+# preserving spaces and passes to $MAKE all unhandled options without any change
+UNRECOGNIZED_OPTIONS=
+while [ $# -gt 0 ]
 do
     case $1 in
-        --) shift; break ;;
-        -p) PROLOGS="${PROLOGS-} $2"; shift ;;
-        -g) GOAL="$2"; shift ;;
         -h) usage; exit ;;
-        -O|-j|-P) ARGS="${ARGS-} $1$2"; shift ;;
-        --profile|--output-sync|--jobs) ARGS="${ARGS-} $1 $2"; shift ;;
-        *) ARGS="${ARGS-} $1" ;;
+
+        # Treat all arguments after -- as file names
+        --) FILES="${FILES-}"; shift; break ;;
+
+        # Collect a list of Prologs separated by space
+        -p) PROLOGS="${PROLOGS-} $2"; shift ;;
+
+        # Join all goals with comma
+        -g) GOAL="${GOAL-}${GOAL+,}$2"; shift ;;
+
+        # Collect quoted argument if it starts with - and doesn't match previous cases
+        -*) UNRECOGNIZED_OPTIONS="$UNRECOGNIZED_OPTIONS '$1'" ;;
+
+        # Treat everything else as a file name. Escape all spaces with backslash.
+        *) FILES="${FILES+$FILES }$(echo "$1" | sed 's/ /\\ /g')" ;;
     esac
     shift
 done
 
-# PROLOGS variable is meant to be expanded to multiple arguments
-# shellcheck disable=SC2086
-"${MAKE:-make}" ${ARGS-} -f /usr/share/prologs/rules.mk PROG="${*:-test.pl}" MAIN="${GOAL:-test}" ${PROLOGS:-all}
+if [ $# -gt 0 ]
+then
+    # We have broken out of loop because -- was found. Collect all remaining arguments as file names
+    FILES="${FILES:+$FILES }$(echo "$@" | sed 's/ /\\ /g')"
+fi
+
+# Reset "$@" to be passed to $MAKE
+eval set -- "$UNRECOGNIZED_OPTIONS ${PROLOGS:-all}"
+
+exec "${MAKE:-make}" "$@" -f /usr/share/prologs/rules.mk ${FILES+PROG="$FILES"} ${GOAL+MAIN="$GOAL"}
