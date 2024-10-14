@@ -3,17 +3,15 @@ PROG        ?= test.pl
 # Default goal to run
 MAIN        ?= test
 
-DOCKER_TAG  := prolog-testbed
-
 # All supported Prolog implementations (keep alphabetic order!)
-PROLOGS     := ciao eclipse gnu scryer swi trealla
+PROLOGS     := ciao eclipse gnu scryer swi trealla b
 
 .PHONY: $(PROLOGS) all
 all: $(PROLOGS)
 
 # Most prologs listed here don't currently work in Docker, add them to $(PROLOGS) when packaged and tested
 b: $(PROG)
-	/opt/BProlog/8.1/bp -i $< -g '$(MAIN),halt'
+	bprolog -i $< -g '$(MAIN),halt'
 bin: $(PROG)
 	bp "consult('$<'),$(MAIN),halt"
 ciao: $(PROG)
