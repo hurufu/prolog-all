@@ -4,7 +4,7 @@
 
 Portable interface to multitude of Prolog implementations. This program doesn't
 provide engines themselves, you need to install them separately. The easiest
-way is to get this package from (AUR)[https://aur.archlinux.org/packages/prologs]
+way is to get this package from [AUR](https://aur.archlinux.org/packages/prologs)
 with all optional dependencies.
 
 ## Usage
