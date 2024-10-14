@@ -17,7 +17,7 @@ b: $(PROG)
 bin: $(PROG)
 	bp "consult('$<'),$(MAIN),halt"
 ciao: ciao-main.pl $(PROG)
-	ciao run $^ $(MAIN)
+	ciao run $^ '$(MAIN)'
 ciao-main.pl:
 	$(file >$@,main([X]) :- call(X).)
 csh: $(PROG)
