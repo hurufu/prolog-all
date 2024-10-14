@@ -4,7 +4,7 @@ PROG        ?= test.pl
 MAIN        ?= test
 
 # All supported Prolog implementations (keep alphabetic order!)
-PROLOGS     := b bin ciao eclipse gnu pop projog scryer swi trealla tu
+PROLOGS     := b bin ciao eclipse gnu pop projog scryer swi trealla tau tu
 
 .PHONY: $(PROLOGS) all
 all: $(PROLOGS)
@@ -45,8 +45,8 @@ sicstus: $(PROG)
 	/opt/SICStus/bin/sicstus -l $< --goal '$(MAIN),halt.'
 swi: $(PROG)
 	swipl -l $< -g '$(MAIN),halt'
-tau: tau.js package.json
-	node $< ./$(PROG) $(MAIN).
+tau:
+	env NODE_PATH=$$(npm root -g) node /usr/share/tauprolog/tau.js $(PROG) '$(MAIN).'
 trealla: $(PROG)
 	tpl $< -g '$(MAIN),halt'
 tu: $(PROG)
