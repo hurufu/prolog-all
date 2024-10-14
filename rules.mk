@@ -4,7 +4,7 @@ PROG        ?= test.pl
 MAIN        ?= test
 
 # All supported Prolog implementations (keep alphabetic order!)
-PROLOGS     := ciao eclipse gnu scryer swi trealla b
+PROLOGS     := ciao eclipse gnu scryer swi trealla b bin
 
 .PHONY: $(PROLOGS) all
 all: $(PROLOGS)
