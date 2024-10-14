@@ -13,7 +13,7 @@ all: $(PROLOGS)
 b: $(PROG)
 	bprolog -i $< -g '$(MAIN),halt'
 bin: $(PROG)
-	bp "consult('$<'),$(MAIN),halt"
+	bp -p10 "consult('$<'),$(MAIN),halt"
 ciao: $(PROG)
 	ciao toplevel -u $< -e '$(MAIN),halt'
 csh: $(PROG)
