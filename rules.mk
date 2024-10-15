@@ -4,7 +4,7 @@ PROG        ?= test.pl
 MAIN        ?= test
 
 # All supported Prolog implementations (keep alphabetic order!)
-PROLOGS     := b bin ciao eclipse gnu pop projog scryer swi trealla tau tu
+PROLOGS     := b bin ciao eclipse gnu pop projog scryer swi trealla tau tu doge
 
 .PHONY: $(PROLOGS) all
 all: $(PROLOGS)
@@ -22,11 +22,11 @@ dgks:
 	java -cp /usr/local/src/dgks-prolog/PrologO.zip prolog.dgks.prolog
 doge: doge-js doge-py doge-java
 doge-js: doge.pl
-	node /usr/local/git/dogelog/player/canned/dogelog.mjs $<
+	node /usr/share/dogelog/dogelog.mjs $<
 doge-py: doge.pl
-	python /usr/local/git/dogelog/playerpy/canned/dogelog.py $<
+	python /usr/share/dogelog/dogelog.py $<
 doge-java: doge.pl
-	java -cp /usr/local/git/dogelog/playerj/canned/dogelog.zip:playerj/canned Index $<
+	java -cp /usr/share/dogelog/dogelog.zip:playerj/canned Index $<
 doge.pl: $(PROG)
 	$(file >$@,false :- \+true. ?- ['$<'],$(MAIN).)
 eclipse: $(PROG)
