@@ -39,11 +39,11 @@ cluster using queueing engine:
 ## Currently working
 
 B, Bin, Ciao, Doge (JavaScript, Python, Java), ECLiPSe, GNU Prolog, Poplog,
-Projog, Scryer, SWI, Trealla, Tau, Tu.
+Projog, Scryer, SWI, Trealla, Tau, Tu, XSB.
 
 ## Anticipated implementations
 
-SICStus (if you have purchased the key), Yap, XSB.
+SICStus (if you have purchased the key), Yap.
 
 ## Tried and wouldn't be supported
 

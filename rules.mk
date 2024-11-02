@@ -4,7 +4,7 @@ PROG        ?= test.pl
 MAIN        ?= test
 
 # All supported Prolog implementations (keep alphabetic order!)
-PROLOGS     := b bin ciao eclipse gnu pop projog scryer swi trealla tau tu doge
+PROLOGS     := b bin ciao eclipse gnu pop projog scryer swi trealla tau tu doge xsb
 
 .PHONY: $(PROLOGS) all
 all: $(PROLOGS)
@@ -52,6 +52,6 @@ trealla: $(PROG)
 tu: $(PROG)
 	java -jar /usr/share/java/tuprolog/2p-repl-1.0.4-redist.jar -T $< solve '$(MAIN)'
 xsb: $(PROG)
-	/usr/local/src/xsb-prolog/XSB/bin/xsb -e "use_module(lists,length/2),['$<'],$(MAIN),halt."
+	xsb -e "['$<'],$(MAIN),halt."
 yap: $(PROG)
 	yap -l $(PROG) -z $(MAIN)
