@@ -54,4 +54,4 @@ tu: $(PROG)
 xsb: $(PROG)
 	xsb -e "['$<'],$(MAIN),halt."
 yap: $(PROG)
-	yap -l $(PROG) -z $(MAIN)
+	yap -l $(PROG) -z '$(MAIN)'
