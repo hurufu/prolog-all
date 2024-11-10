@@ -31,8 +31,10 @@ doge.pl: $(PROG)
 	$(file >$@,false :- \+true. ?- ['$<'],$(MAIN).)
 eclipse: $(PROG)
 	eclipse-clp -e "['$<'],$(MAIN)"
+gnu: export TRAILSZ  := 999999
+gnu: export GLOBALSZ := 999999
 gnu: $(PROG)
-	env TRAILSZ=999999 GLOBALSZ=999999 gprolog --consult-file $< --query-goal '$(MAIN),halt'
+	gprolog --consult-file $< --query-goal '$(MAIN),halt'
 jlog: $(PROG)
 	java -jar /opt/jlog/1.3.6/JLog.jar
 pop: $(PROG)
@@ -45,8 +47,9 @@ sicstus: $(PROG)
 	/opt/SICStus/bin/sicstus -l $< --goal '$(MAIN),halt.'
 swi: $(PROG)
 	swipl -l $< -g '$(MAIN),halt'
+tau: export NODE_PATH := $(shell npm root -g)
 tau:
-	env NODE_PATH=$$(npm root -g) node /usr/share/tauprolog/tau.js $(PROG) '$(MAIN).'
+	node /usr/share/tauprolog/tau.js $(PROG) '$(MAIN).'
 trealla: $(PROG)
 	tpl $< -g '$(MAIN),halt'
 tu: $(PROG)
