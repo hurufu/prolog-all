@@ -1,17 +1,23 @@
-# All the Prologs
+# Common CLI to run Prolog code snippets using different engines
 
-🚧 Work-in-progress, beware. Was tested only on Arch Linux.
+Portable interface to multitude of Prolog implementations. The main purpose is
+to help with spotting differences and facilitate comparison in behavior for
+test snippets of code during development for Prolog engine maintainers.
 
-Portable interface to multitude of Prolog implementations. This program doesn't
-provide engines themselves, you need to install them separately. The easiest
-way is to get this package from [AUR](https://aur.archlinux.org/packages/prologs)
-with all optional dependencies.
+This program doesn't provide engines themselves, you need to install them
+separately. The easiest way is to get this package from [AUR][AUR] with all
+optional dependencies.
 
-## Usage
+Otherwise you can try a [containerized][Docker] variant.
 
-Start SWI-Prolog top level interpreter:
+🚧 This project was tested only on Arch Linux, but there is nothing here to fail,
+it just re-arranges arguments and calls an actual Prolog executable. That means
+that if you have installed Prolog system-wide it should just work for you too.
 
-    prologs -p swi
+[AUR]: https://aur.archlinux.org/packages/prologs
+[Docker]: https://github.com/hurufu/prolog-docker
+
+## Usage examples
 
 Run `foo,bar` from `file.pl` with all available prologs (both variants do the same):
 
@@ -30,20 +36,17 @@ You can use `remake(1)` to compare execution time of different implementations:
 
     env MAKE=remake prologs -g run --profile bench.pl
 
-Or alternatively in the futurue you would be able to use
-[biomake](https://github.com/evoldoers/biomake) to run your code on distributed
-cluster using queueing engine:
+Or alternatively in the future you would be able to use [biomake][biomake] to
+run your code on distributed cluster using queueing engine:
 
     env MAKE=biomake prologs -g run bench.pl -j -Qpbs
+
+[biomake]: https://github.com/evoldoers/biomake
 
 ## Currently working
 
 B, Bin, Ciao, Doge (JavaScript, Python, Java), ECLiPSe, GNU Prolog, Poplog,
-Projog, Scryer, SWI, Trealla, Tau, Tu, XSB, Yap.
-
-## Anticipated implementations
-
-SICStus (if you have purchased the key).
+Projog, Scryer, SICStus[^1], SWI, Trealla, Tau, Tu, XSB, Yap.
 
 ## Tried and wouldn't be supported
 
@@ -87,6 +90,8 @@ SICStus (if you have purchased the key).
   * https://github.com/JalogTeam/Jalog
   * ExperProlog
   * https://github.com/teyjus/teyjus
+
+[^1]: You need to have a legally obtained copy installed in /opt/SICStus
 
 [a]: https://jlogic.sourceforge.net/ "JLog and JScriptLog sources"
 [b]: https://www.lpa.co.uk/ind_pro.htm
