@@ -19,13 +19,9 @@ csh: $(PROG)
 	cd '/opt/C#Prolog SF4.1' && env MONO_PATH=CSProlog/obj/Debug mono PLd/obj/Debug/PLd.exe "['$(realpath $<)'],$(MAIN),halt."
 dgks:
 	java -cp /usr/local/src/dgks-prolog/PrologO.zip prolog.dgks.prolog
-doge: doge-js doge-py doge-java
-doge-js: doge.pl
-	node /usr/share/dogelog/dogelog.mjs $<
-doge-py: doge.pl
-	python /usr/share/dogelog/dogelog.py $<
-doge-java: doge.pl
-	java -cp /usr/share/dogelog/dogelog.zip:playerj/canned Index $<
+doge: doge-node doge-pypy doge-java doge-bun doge-python
+doge-%: doge.pl
+	env 'DOGELOG_BACKEND=$*' dogelog $<
 doge.pl: $(PROG)
 	$(file >$@,false :- \+true. ?- ['$<'],$(MAIN).)
 eclipse: $(PROG)
