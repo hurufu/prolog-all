@@ -11,7 +11,7 @@ usage() {
 	    $0 [-h] [-p prolog1 -p 'prolog2 prolog3' ...] [-g goal1 -g goal2 ...] [make(1) options ...] [--] file1 file2 ...
 	
 	Supported Prologs:
-	    b bin ciao eclipse gnu pop projog scryer swi trealla tuProlog
+	    b bin ciao doge eclipse gnu pop projog scryer swi trealla tau tu xsb yap
 	
 	Environment variables:
 	    MAKE – make(1) compatible executable (can be eg. remake(1) or biomake)

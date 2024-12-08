@@ -4,12 +4,11 @@ PROG        ?= test.pl
 MAIN        ?= test
 
 # All supported Prolog implementations (keep alphabetic order!)
-PROLOGS     := b bin ciao eclipse gnu pop projog scryer swi trealla tau tu doge xsb yap
+PROLOGS     := b bin ciao doge eclipse gnu pop projog scryer swi trealla tau tu xsb yap
 
 .PHONY: $(PROLOGS) all
 all: $(PROLOGS)
 
-# Most prologs listed here don't currently work in Docker, add them to $(PROLOGS) when packaged and tested
 b: $(PROG)
 	bprolog -i $< -g '$(MAIN),halt'
 bin: $(PROG)
