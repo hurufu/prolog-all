@@ -45,7 +45,7 @@ run your code on distributed cluster using queueing engine:
 
 ## Currently working
 
-B, Bin, Ciao, Doge (JavaScript, Python, Java), ECLiPSe, GNU Prolog, Poplog,
+B, Bin, C#Prolog, Ciao, Doge (JavaScript, Python, Java), ECLiPSe, GNU Prolog, Poplog,
 Projog, Scryer, SICStus[^1], SWI, Trealla, Tau, Tu, XSB, Yap.
 
 ## Tried and wouldn't be supported
@@ -65,8 +65,6 @@ Projog, Scryer, SICStus[^1], SWI, Trealla, Tau, Tu, XSB, Yap.
   * [Quintus Prolog][g] – sources are paywalled, no real reason to use because
     it's successor SICStus is available.
   * [Minerva Prolog][h] – source code is unobtainium now.
-  * [C# Prolog][i] – doesn't support cyclic terms and has non-standard exception
-    handling.
   * [Amzi! Prolog][j] – looks like a complete IDE, hard to compile.
   * [Jinni Prolog][k] – code is freely availvable, but I don't have stamina to
     fix all compilation issues.
@@ -103,7 +101,6 @@ Projog, Scryer, SICStus[^1], SWI, Trealla, Tau, Tu, XSB, Yap.
 [f]: https://web.archive.org/web/20031203213809/http://perso.wanadoo.fr/colin.barker/tpro/tpro.htm
 [g]: https://quintus.sics.se/
 [h]: https://web.archive.org/web/20121105020447/http://www.ifcomputer.co.jp/MINERVA/Download/home_en.html
-[i]: http://sourceforge.net/projects/cs-prolog/
 [j]: http://www.amzi.com/AmziOpenSource/
 [k]: https://github.com/heathmanb/JinniProlog
 [l]: https://web.archive.org/web/20170717032834/http://www.ifcomputer.de/Products/Prolog/Download/home_de.html

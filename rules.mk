@@ -4,7 +4,7 @@ PROG        ?= test.pl
 MAIN        ?= test
 
 # All supported Prolog implementations (keep alphabetic order!)
-PROLOGS     := b bin ciao doge eclipse gnu pop projog scryer swi trealla tau tu xsb yap
+PROLOGS     := b bin ciao csh doge eclipse gnu pop projog scryer swi trealla tau tu xsb yap
 
 .PHONY: $(PROLOGS) all
 all: $(PROLOGS)
@@ -15,8 +15,9 @@ bin: $(PROG)
 	bp -p10 "consult('$<'),$(MAIN),halt"
 ciao: $(PROG)
 	ciao toplevel -u $< -e '$(MAIN),halt'
+csh: export MONO_PATH := CSProlog/obj/Debug
 csh: $(PROG)
-	cd '/opt/C#Prolog SF4.1' && env MONO_PATH=CSProlog/obj/Debug mono PLd/obj/Debug/PLd.exe "['$(realpath $<)'],$(MAIN),halt."
+	cd /opt/cs-prolog && mono PLd/obj/Debug/PLd.exe "['$(realpath $<)'],$(MAIN),halt."
 dgks:
 	java -cp /usr/local/src/dgks-prolog/PrologO.zip prolog.dgks.prolog
 doge: doge-node doge-pypy doge-java doge-bun doge-python
