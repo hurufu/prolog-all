@@ -45,8 +45,13 @@ run your code on distributed cluster using queueing engine:
 
 ## Currently working
 
-B, Bin, C#Prolog, Ciao, Doge (JavaScript, Python, Java), ECLiPSe, GNU Prolog, Poplog,
+B, Bin, C#Prolog, Ciao, DGKS, Doge (JavaScript, Python, Java), ECLiPSe, GNU Prolog, Poplog,
 Projog, Scryer, SICStus[^1], SWI, Trealla, Tau, Tu, XSB, Yap.
+
+## Notes on some less known Prologs
+
+  * [DGKS Prolog][e] – Looks like a someone's toy project from late 90', no CLI
+    interface without writing custom Java code, can't handle operators correctly.
 
 ## Tried and wouldn't be supported
 
@@ -57,8 +62,6 @@ Projog, Scryer, SICStus[^1], SWI, Trealla, Tau, Tu, XSB, Yap.
   * [Brain Aid Prolog][c] – can't find sources.
   * [Strawberry Prolog][d] – full IDE no easy way to integrate
     into CLI.
-  * [DGKS Prolog][e] – Looks like a someone's toy project from late 90', no CLI
-    interface without writing custom Java code, can't handle operators correctly.
   * Turbo Prolog – can't find sources and it seems to be a lot of pain anyways.
     Links:
       * [Turbo Prolog Goodies][f]

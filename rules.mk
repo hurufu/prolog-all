@@ -18,8 +18,9 @@ ciao: $(PROG)
 csh: export MONO_PATH := CSProlog/obj/Debug
 csh: $(PROG)
 	cd /opt/cs-prolog && mono PLd/obj/Debug/PLd.exe "['$(realpath $<)'],$(MAIN),halt."
+dgks: export CLASSPATH := /usr/share/java/dgks-prolog/PrologO.zip
 dgks:
-	java -cp /usr/local/src/dgks-prolog/PrologO.zip prolog.dgks.prolog
+	java prolog.dgks.prolog
 doge: doge-node doge-pypy doge-java doge-bun doge-python
 doge-%: doge.pl
 	env 'DOGELOG_BACKEND=$*' dogelog $<
