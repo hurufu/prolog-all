@@ -95,6 +95,7 @@ Projog, Scryer, SICStus[^1], SWI, Trealla, Tau, Tu, XSB, Yap.
   * https://github.com/teyjus/teyjus
   * https://github.com/ptarau/StylaProlog
   * LinProlog https://github.com/ptarau/AgenticProlog (??)
+  * [N-Prolog](https://github.com/sasagawa888/nprolog)
 
 [^1]: You need to have a legally obtained copy installed in /opt/SICStus
 
