@@ -75,8 +75,6 @@ Projog, Scryer, SICStus[^1], SWI, Trealla, Tau, Tu, XSB, Yap.
     fix all compilation issues.
   * [IF/Prolog][l] – there are some very old sources, it might work or might not.
   * [BIM Prolog][m] – A lot of information, but no sources nor executables.
-  * [Jekejeke Prolog][n] – I have found archived page, but .jar file wasn't
-    archived and I don't like downloading it from random sites on internet.
 
 ## Still needs research
 
@@ -115,5 +113,4 @@ Projog, Scryer, SICStus[^1], SWI, Trealla, Tau, Tu, XSB, Yap.
 [k]: https://github.com/heathmanb/JinniProlog
 [l]: https://web.archive.org/web/20170717032834/http://www.ifcomputer.de/Products/Prolog/Download/home_de.html
 [m]: https://people.cs.kuleuven.be/~Maurice.Bruynooghe/Prolog/Prolog.html
-[n]: https://web.archive.org/web/20200223033605/http://www.jekejeke.ch/idatab/doclet/prod/en/docs/05_run/05_down.jsp
 [o]: https://github.com/ichiban/prolog
