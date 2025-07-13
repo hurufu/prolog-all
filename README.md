@@ -97,6 +97,9 @@ Projog, Scryer, SICStus[^1], SWI, Trealla, Tau, Tu, XSB, Yap.
   * UnH Prolog
   * InH Prolog
   * C_Prolog
+  * [MOLOG](https://web.archive.org/web/20000503112730/http://www.irit.fr/ACTIVITES/EQ_ALG/Herzig/molog.html)
+    https://www.cs.ox.ac.uk/ian.horrocks/Publications/download/2006/HHSS06.pdf
+  * [Allegro Prolog](https://franz.com/support/documentation/prolog.html)
 
 [^1]: You need to have a legally obtained copy installed in /opt/SICStus
 
