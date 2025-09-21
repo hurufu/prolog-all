@@ -6,15 +6,24 @@ MAIN        ?= test
 # All supported Prolog implementations (keep alphabetic order!)
 PROLOGS     := b bin ciao csh doge eclipse gnu pop projog scryer swi trealla tau tu xsb yap
 
+# FIXME: White spaces break badly for most rules
+# FIXME: Filenames can be interpreted as arbitrary Prolog code
+
+EMPTY :=
+COMMA := ,
+SPACE := $(EMPTY) $(EMPTY)
+join-comma = $(subst $(SPACE),'$(COMMA)',$(strip $1))
+join-include = $(patsubst %,include('%')$(COMMA),$(strip $1))
+
 .PHONY: $(PROLOGS) all
 all: $(PROLOGS)
 
 b: $(PROG)
-	bprolog -i $< -g '$(MAIN),halt'
+	bprolog $(addprefix -i ,$^) -g "($(MAIN)) -> true; write('%% Goal failed\n')" -g halt
 bin: $(PROG)
 	bp -p10 "consult('$<'),$(MAIN),halt"
 ciao: $(PROG)
-	ciao toplevel -u $< -e '$(MAIN),halt'
+	echo "$(call join-include,$^) (catch(($(MAIN)),_,E=2) -> (E=0;true); E=1), halt(E)." | ciaosh
 csh: export MONO_PATH := CSProlog/obj/Debug
 csh: $(PROG)
 	cd /opt/cs-prolog && mono PLd/obj/Debug/PLd.exe "['$(realpath $<)'],$(MAIN),halt."
@@ -31,7 +40,7 @@ eclipse: $(PROG)
 gnu: export TRAILSZ  := 999999
 gnu: export GLOBALSZ := 999999
 gnu: $(PROG)
-	gprolog --consult-file $< --query-goal '$(MAIN),halt'
+	exec gprolog $(addprefix --consult-file ,$^) --query-goal '(catch(($(MAIN)), _, E=2) -> (E=0;true); E=1), halt(E)'
 jlog: $(PROG)
 	java -jar /opt/jlog/1.3.6/JLog.jar
 pop: $(PROG)
@@ -39,19 +48,19 @@ pop: $(PROG)
 projog: $(PROG)
 	java -cp '/usr/share/java/projog/*' org.projog.tools.ProjogConsole $< <(echo '?- $(MAIN).') <(echo '?- quit.')
 scryer: $(PROG)
-	scryer-prolog $< -g '$(MAIN),halt'
+	exec scryer-prolog -g '(catch(($(MAIN)), X, (E=2,writeq(X),nl)) -> (E = 0; true); E = 1), halt(E)' $^
 sicstus: $(PROG)
 	/opt/SICStus/bin/sicstus -l $< --goal '$(MAIN),halt.'
 swi: $(PROG)
-	swipl -l $< -g '$(MAIN),halt'
+	exec swipl -g '$(MAIN)' -g halt $^
 tau: export NODE_PATH := $(shell npm root -g)
 tau:
 	node /usr/share/tauprolog/tau.js $(PROG) '$(MAIN).'
 trealla: $(PROG)
-	tpl $< -g '$(MAIN),halt'
+	exec tpl -g '(catch(($(MAIN)), _, false) -> E = 0; E = 1), halt(E)' $^
 tu: $(PROG)
-	java -jar /usr/share/java/tuprolog/2p-repl-1.0.4-redist.jar -T $< solve '$(MAIN)'
+	java -jar /usr/share/java/tuprolog/2p-repl-1.0.4-redist.jar $(addprefix -T,$^) solve 'true,(catch($(MAIN),_,E=2) -> (E=0;true); E=1),halt(E)'
 xsb: $(PROG)
-	xsb -e "['$<'],$(MAIN),halt."
+	exec xsb -e "(['$(call join-comma,$^)'], catch(($(MAIN)), _, E = 2) -> (E = 0; true); E = 1), halt(E)."
 yap: $(PROG)
-	yap -l $(PROG) -z '$(MAIN)'
+	exec yap -g "(['$(call join-comma,$^)'], catch(($(MAIN)), _, E = 2) -> (E = 0; true); E = 1), halt(E)"
